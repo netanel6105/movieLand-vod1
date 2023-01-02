@@ -6,19 +6,19 @@ import { apiPost } from '../../services/services'
 // p pl pr pt pb >> m mr ml mt mb
 const SignUp = () => {
   const { getValues, register, handleSubmit, formState: { errors } } = useForm()
-  const [error,setError] = useState('')
-  
+  const [error, setError] = useState('')
+
   const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
-  const signUp = async (_body) =>{
-    
-    try{
+  const signUp = async (_body) => {
+
+    try {
       console.log(_body)
-      const {data} = await apiPost(SIGN_UP_URL,_body)
+      const { data } = await apiPost(SIGN_UP_URL, _body)
       console.log(data)
-    }catch(err){
+    } catch (err) {
       console.log(err.response.data)
-      if(err.response.data.code == 11000){
+      if (err.response.data.code == 11000) {
         setError(err.response.data.err_msg)
       }
     }
@@ -28,7 +28,7 @@ const SignUp = () => {
   const onSub = (data) => {
     delete data.confirmPassword
     console.log(data)
-    const obj ={
+    const obj = {
       fullName: data.fullName,
       email: data.email,
       password: data.password
@@ -64,13 +64,14 @@ const SignUp = () => {
                 fullName
               </label>
               <input
-                {...register('fullName', { required: true, minLength: 2, maxLength: 20 })}
+                {...register('fullName', { required: { value: true, message: 'Name is required.' }, minLength: { value: 2, message: 'Minimum of 2 characters required.' }, maxLength: { value: 20, message: 'Maximum of 20 characters.' } })}
+
                 type="text"
 
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="FullName..."
               />
-              {errors.fullName && <p className='text-red-600'>name is required </p>}
+              {errors.fullName && <p className='text-red-600'>{errors.fullName.message}</p>}
             </div>
 
             <div >
@@ -78,13 +79,16 @@ const SignUp = () => {
                 Email address
               </label>
               <input
-                {...register('email', { required: true, pattern: emailReg })}
+                {...register('email', { required: { value: true, message: "Email is required" }, pattern: { value: emailReg, message: "Invalid Email" } })}
+
+
                 type="email"
 
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Email address"
               />
-  {errors.email && <p className='text-red-600'>email is required </p>}
+              {errors.email && <p className='text-red-600'>{errors.email.message}</p>}
+
             </div>
             <div >
               <label className="sr-only">
@@ -97,7 +101,7 @@ const SignUp = () => {
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="password.."
               />
-                {errors.password && <p className='text-red-600'>password is required </p>}
+              {errors.password && <p className='text-red-600'>password is required </p>}
 
             </div>
             <div >
@@ -105,13 +109,13 @@ const SignUp = () => {
                 confirm password...
               </label>
               <input
-                {...register('confirmPassword', { required: true,validate:(value)=>value==getValues('password') })}
+                {...register('confirmPassword', { required: true, validate: (value) => value == getValues('password') })}
                 type="password"
 
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="confirm password....."
               />
-                {errors.confirmPassword && <p className='text-red-600'>password is not match </p>}
+              {errors.confirmPassword && <p className='text-red-600'>password is not match </p>}
 
             </div>
 
