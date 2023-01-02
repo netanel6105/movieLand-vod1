@@ -42,7 +42,7 @@ router.post("/", async(req, res) => {
         res.status(201).json(user);
     } catch (err) {
         if (err.code == 11000) { // if the email is already (Email Uniqe)
-            return res.status(400).json({ code: 11000, err_msg: "Email already in system try log in" })
+            return res.status(400).json({ code: 11000, err_msg: "Email already exist" })
         }
         console.log(err);
         res.status(500).json(err);
