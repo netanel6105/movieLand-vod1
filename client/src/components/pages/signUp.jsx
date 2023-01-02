@@ -1,12 +1,13 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SIGN_UP_URL } from '../../constant/constant'
 import { apiPost } from '../../services/services'
 // p pl pr pt pb >> m mr ml mt mb
 const SignUp = () => {
   const { getValues, register, handleSubmit, formState: { errors } } = useForm()
-
+  const [error,setError] = useState('')
+  
   const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
   const signUp = async (_body) =>{
@@ -16,7 +17,10 @@ const SignUp = () => {
       const {data} = await apiPost(SIGN_UP_URL,_body)
       console.log(data)
     }catch(err){
-      console.log(err.response)
+      console.log(err.response.data)
+      if(err.response.data.code == 11000){
+        setError(err.response.data.err_msg)
+      }
     }
 
   }
@@ -66,7 +70,7 @@ const SignUp = () => {
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="FullName..."
               />
-              {errors.name && <p className='text-red-600'>name is required </p>}
+              {errors.fullName && <p className='text-red-600'>name is required </p>}
             </div>
 
             <div >
@@ -132,7 +136,7 @@ const SignUp = () => {
               </a>
             </div>
           </div>
-
+          {errors && <p className='text-red-600'>{error} </p>}
           <div>
             <button
               type="submit"
