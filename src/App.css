@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    
+    background-color: #000000;
+    color: aliceblue;
+}
+
+
+    
+
+
+/*in navBar.jsx*/
+.navTop {
+    background: rgba(0, 0, 0, 0.807);
+
+}
+
+
+
+/*in navBar.jsx*/
+.bot-1 {
+    background-color:  #CE930A;
+    border-radius: 1%;
+    height: 40px;
+}
+
+
+/*in navBar.jsx*/
+.inp-1 {
+    border-radius: 1%;
+
+    height: 40px;
+}
+
+
+/* all bg-carousel places in header.jsx*/
+.bg-carousel1 {
+    min-height: 425px;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    
+    background-image: url(https://earlygame.com/uploads/images/_headerImage/netflix-library-gamer-movies.jpg);
+}
+
+.bg-carousel2 {
+    min-height: 425px;
+    background-size: cover;
+    background-position:top;
+
+    background-size: 100% 130%;
+    background-image: url(https://thumbnails.cbsig.net/_x/w1200/CBS_Production_Entertainment_VMS/2021/05/27/1902183491948/13HRS_SAlone_16_9_1920x1080_NB_988230_1920x1080.jpg
+    );
+}
+
+.bg-carousel3 {
+    min-height: 425px;
+    background-size: cover;
+    background-position: center;
+    background-size: 100% 100%;
+    background-image: url(https://www.looper.com/img/gallery/puss-in-boots-the-last-wish-trailer-the-journey-of-a-lifetime/l-intro-1668541930.jpg);
+}
+
+/* places in home.jsx*/
+.topHome{
+background-color: #fcb500dd;
+   
+}
+/*places in home.jsx*/
+.topYear{
+    color: #000000;
+    font-family: 'Lobster';
+}
+
+/*places in vodList.jsx in img*/
+.imageList{
+   width: 80%;
+   height: 100%;
+   border-radius: 10% 10%;
+   
+
+}
+/*places in vodList.jsx*/
+.vod-list{
+    display: flex;
+    justify-content: space-around;
+    justify-content: center;
+  
+}
+
+
+.buttYearSt{
+    color: #000000;
+    font-size: large;
+    
+   
+}
+button:hover{
+    color:bisque
+}
+
+/*places in home.jsx*/
+.foundCss{
+    font-size: xx-large;
+}
+
+/*footer.jsx*/
+.footerColor{
+    color: #CE930A;
+}
+
+
+.size-font{
+    font-size:larger;
+    font-weight: 400;   
+    
+}
+
+.size-font1{
+   color: rgba(255, 0, 0, 0.852);
+   font-size: 25px;
+    font-weight: 900;
+
+}
+
+
+
+/*places in navBar.jsx*/
+.animate-charcter
+{
+  background-image: linear-gradient(
+    -225deg,
+    #CE930A 0%,
+    #CE930A 29%,
+    #ff1361 67%,
+    #CE930A 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+      font-size: 55px;
+    
+      
+}
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+
+  
+
+/* places in navBar.jsx in h1*/
+@media only screen and (max-width: 315px) {
+    .animate-charcter{
+        font-size: 30px;
+        font-weight: 900;
+    }
+  }
+
+/*all .bg-carousel places in header.jsx .top*/
+@media only screen and (max-width:350px) {
+    .bg-carousel1{
+       min-height: 200px;
+    }
+  }
+@media only screen and (max-width: 350px) {
+    .bg-carousel2{
+       min-height: 200px;
+    }
+  }
+@media only screen and (max-width: 350px) {
+    .bg-carousel3{
+       min-height: 200px;
+    }
+  }
+
+
+
+  /*places in infoList.jsx .stars*/
+@media only screen and (max-width:770px) {
+    .stars{
+        display: flex;
+        justify-content: center;
+    }
+  }
+@media only screen and (max-width:770px) {
+    .imgVodList{
+        display: flex;
+        justify-content: center;
+    }
+  }
+
+
+
+@media only screen and (max-width:345px) {
+    .imageList{
+        width: 90%;
+        height: 100%;
+        border-radius:10% 10%;
+     }
+  }
+
+
+  /* #CE930A */
+
+  /* #fcb500dd */
+
+  /* #CE930A */
+
+  /* #fcb500dd */
