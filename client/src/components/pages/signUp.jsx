@@ -125,13 +125,17 @@ const SignUp = () => {
                 confirm password...
               </label>
               <input
-                {...register('confirmPassword', { required: true, validate: {value:(value) => value == getValues('password')},message:'password is not match' })}
+                    {...register('confirmPassword', {
+                      required: {value:true,message:'confirm password is required'}, validate:validateConfirmPassword
+                    })}
+  
                 type="password"
 
                 className="mt-3 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="confirm password....."
               />
               {errors.confirmPassword && <p className='text-red-600'>{errors.confirmPassword.message}</p>}
+              
 
             </div>
 
