@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SIGN_UP_URL } from '../../constant/constant'
 import { apiPost } from '../../services/services'
+
 // p pl pr pt pb >> m mr ml mt mb
+
 const SignUp = () => {
   const { getValues, register, handleSubmit, formState: { errors } } = useForm()
   const [error, setError] = useState('')
@@ -22,8 +24,10 @@ const SignUp = () => {
         setError(err.response.data.err_msg)
       }
     }
-
   }
+
+
+
 
   const onSub = (data) => {
     delete data.confirmPassword
@@ -37,6 +41,12 @@ const SignUp = () => {
 
     signUp(obj)
   }
+
+
+
+
+
+
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
@@ -56,9 +66,13 @@ const SignUp = () => {
             </a>
           </p>
         </div>
+
+
+
         <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="-space-y-px rounded-md shadow-sm">
+            
             <div >
               <label className="sr-only">
                 fullName
