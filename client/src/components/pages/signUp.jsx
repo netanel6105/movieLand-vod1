@@ -1,6 +1,7 @@
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { SIGN_UP_URL } from '../../constant/constant'
 import { apiPost } from '../../services/services'
 
@@ -9,7 +10,7 @@ import { apiPost } from '../../services/services'
 const SignUp = () => {
   const { getValues, register, handleSubmit, formState: { errors } } = useForm()
   const [error, setError] = useState('')
-
+  const nav = useNavigate()
   const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
 
   const signUp = async (_body) => {
@@ -18,6 +19,12 @@ const SignUp = () => {
       console.log(_body)
       const { data } = await apiPost(SIGN_UP_URL, _body)
       console.log(data)
+      if(data.msg){
+        nav('/logIn')
+      }
+
+
+
     } catch (err) {
       console.log(err.response.data)
       if (err.response.data.code == 11000) {

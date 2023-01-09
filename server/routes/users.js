@@ -39,7 +39,7 @@ router.post("/", async(req, res) => {
         user.password = await bcrypt.hash(user.password, 10); //Encryption the password of the user by bcrypt module
         await user.save(); // save the user/object in database
         user.password = "******"; //before send json need to hide the Encryption of the password
-        res.status(201).json(user);
+        res.status(201).json({msg:'user created'});
     } catch (err) {
         if (err.code == 11000) { // if the email is already (Email Uniqe)
             return res.status(400).json({ code: 11000, err_msg: "Email already exist" })

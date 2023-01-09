@@ -103,7 +103,7 @@ const Login = () => {
                     </div>
                     {error && <p className='text-red-600'>{error}</p>}
                     <div className="flex items-center justify-between">
-                        {loading ?
+                        {loading  && !error ?
                             <div className="flex items-center">
                                 <img style={{ position: 'absolute', zIndex: '-1' }} width={'80px'} src='https://media4.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e47nogttyy9l1kfcz2ckyo2oot6pkp8dhvia62f9euw&rid=giphy.gif&ct=g' />
 
