@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomeAdmin from '../components/admin/homeAdmin';
 import Home from '../components/home';
+import Login from '../components/pages/login';
 import SignUp from '../components/pages/signUp';
 import LayoutAdmin from '../layout/layoutAdmin/layoutAdmin';
 import Layout from '../layout/layoutUser/layout';
@@ -15,6 +16,7 @@ const AppRouters = () => {
           
           <Route index element={<Home />} />
           <Route path='/signUp' element={<SignUp />} />
+          <Route path='/logIn' element={<Login />} />
           
       
         </Route>
