@@ -16,7 +16,7 @@ const menu = [
   { name: 'SignUp', href: '/signUp' },
 ]
 const menuProfile = [
-  { name: 'ToDo List', href: '/todo' }
+  { name: 'ToDo List', href: '/todo' },
   { name: 'Logout', href: '/logout'}
 ]
 
