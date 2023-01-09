@@ -2,7 +2,8 @@ import { LockClosedIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { LOGIN_URL } from '../../constant/constant'
+import { useNavigate } from 'react-router-dom'
+import { LOGIN_URL, TOKEN_KEY } from '../../constant/constant'
 import { apiPost } from '../../services/services'
 // p pl pr pt pb >> m mr ml mt mb
 const Login = () => {
@@ -11,15 +12,29 @@ const Login = () => {
   const [error, setError] = useState('')
   const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
   console.log(errors)
+const nav = useNavigate()
+
   const login = async (_body) => {
 
     try {
       console.log(_body)
       const { data } = await apiPost(LOGIN_URL, _body)
       console.log(data)
+      
+      if(data.token){
+          localStorage.setItem(TOKEN_KEY,data.token)
+        if(data.role == 'admin'){
+            nav('/admin')
+        }
+        else{
+            nav('/todo')
+        }
+      }
+      
+      
     } catch (err) {
       console.log(err.response.data)
-      if (err.response.data.code == 11000) {
+      if (err.response.data.err_msg) {
           setError(err.response.data.err_msg)
       }
     }

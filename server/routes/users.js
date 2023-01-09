@@ -60,12 +60,12 @@ router.post("/login", async(req, res) => {
     try {
         let user = await UserModel.findOne({ email: req.body.email });
         if (!user) {
-            return res.status(401).json({ err_msg: "User/email not found in the system" });
+            return res.status(401).json({ err_msg: "email or password invalid" });
         }
         //compatibility passwords between req.body.password to user.password
         let validPassword = await bcrypt.compare(req.body.password, user.password); // compatibility passwords of bcrypt
         if (!validPassword) { //if not compatibility
-            return res.status(401).json({ err_msg: "Password worng" });
+            return res.status(401).json({ err_msg: "email or password invalid" });
         }
         // create a token, the token get the user._id
         let token = genToken(user._id)
