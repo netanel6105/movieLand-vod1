@@ -2,16 +2,45 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
-import {FaUser,FaLock} from 'react-icons/fa'
+import { FaUser, FaLock } from 'react-icons/fa'
+import { useContext } from 'react'
+import { AppContext } from '../../../context/context'
+import { apiGet } from '../../../services/services'
+import { TOKEN_KEY, USER_INFO } from '../../../constant/constant'
+import { useEffect } from 'react'
 const navigation = [
   { name: 'Home', href: '/', current: true },
 ]
+const menu = [
+  { name: 'Login', href: '/login' },
+  { name: 'SignUp', href: '/signUp' },
+]
+const menuProfile = [
+  { name: 'ToDo List', href: '/todo' }
+  { name: 'Logout', href: '/logout'}
+]
+
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Header() {
+  const { user, setUser } = useContext(AppContext)
+
+  const getUser = async () => {
+    const { data } = await apiGet(USER_INFO)
+    console.log(data)
+    setUser(data)
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem(TOKEN_KEY) && !user) {
+      getUser()
+    }
+  }, [user])
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -31,8 +60,8 @@ export default function Header() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                    <FaUser  className="block h-8 w-auto lg:hidden" color='white' size={'30px'}/>
-                    <FaUser   className="hidden h-8 w-auto lg:block" color='white' size={'30px'}/>
+                  <FaUser className="block h-8 w-auto lg:hidden" color='white' size={'30px'} />
+                  <FaUser className="hidden h-8 w-auto lg:block" color='white' size={'30px'} />
                   {/* <img
                    
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -77,8 +106,8 @@ export default function Header() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCELxs9kucYga4i_DYQ0h7mklSRR8-BI0Gl-c2lHLP1w&s"
-                        alt=""
+                        src={user?.profileImg  ?  user.profileImg : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCELxs9kucYga4i_DYQ0h7mklSRR8-BI0Gl-c2lHLP1w&s"}
+                        alt="profileImg"
                       />
                     </Menu.Button>
                   </div>
@@ -91,28 +120,46 @@ export default function Header() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
+
+
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to={"/logIn"}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Login
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to={"/signUp"}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            SignUp
-                          </Link>
-                        )}
-                      </Menu.Item>
-                 
+
+                      {!user ?
+                        <div>
+                          {menu.map((item, i) => (
+                          <Menu.Item key={i}>
+                          {({ active }) => (
+                            <Link
+                              to={item.href}
+                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                            >
+                              {item.name}
+                            </Link>
+                          )}
+                        </Menu.Item>
+
+                          ))}
+                        </div>
+
+                        :
+                        <div>
+
+                          {menuProfile.map((item, i) => (
+                            <Menu.Item key={i}>
+                              {({ active }) => (
+                                <Link
+                                  to={item.href}
+                                  className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                >
+                                  {item.name}
+                                </Link>
+                              )}
+                            </Menu.Item>
+
+                          ))}
+                        </div>
+                      }
+
                     </Menu.Items>
                   </Transition>
                 </Menu>

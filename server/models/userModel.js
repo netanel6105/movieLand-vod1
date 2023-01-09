@@ -10,6 +10,7 @@ let userSchema = new mongoose.Schema({
     password: String,
     address: String,
     phone: String,
+    profileImg:String,
     role: {
         type: String,
         default: "user"
@@ -32,6 +33,8 @@ exports.genToken = (_id) => { //the function get UserID
         //(jwt.sign({ ID of User }, `SecretWord`, { expiresIn: "Time to expired" }))
         return token; // return the token created
     }
+
+
     //validation create user
 exports.validateUser = (_reqBody) => { //validation of create a user with request from the body
     let joiSchema = Joi.object({ // Create a joi object
@@ -41,7 +44,10 @@ exports.validateUser = (_reqBody) => { //validation of create a user with reques
         password: Joi.string().min(3).max(100).required(),
         // allow - Allows you to send an empty property
         address: Joi.string().min(2).max(150).allow(null, ""), //allow (Must not send)
-        phone: Joi.string().min(2).max(20).allow(null, "")
+        phone: Joi.string().min(2).max(20).allow(null, ""),
+        profileImg: Joi.string().min(2).max(999).allow(null, ""),
+        
+
     })
     return joiSchema.validate(_reqBody); // return the validation (joi object) with request from the body 
 }

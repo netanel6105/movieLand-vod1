@@ -5,7 +5,7 @@ import AppRouters from './routers/appRouters';
 
 
 function App() {
-  const [user,setUser] = useState({name:'yarin',age:25});
+  const [user,setUser] = useState(null);
 
   return (
     <div >
