@@ -126,7 +126,7 @@ const SignUp = () => {
               </label>
               <input
                     {...register('confirmPassword', {
-                      required: {value:true,message:'confirm password is required'}, validate:validateConfirmPassword
+                      required: {value:true,message:'confirm password is required'}, validate:(value)=> value ===getValues('password')|| 'password not mach'
                     })}
   
                 type="password"
