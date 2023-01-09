@@ -2,11 +2,11 @@ import { LockClosedIcon } from '@heroicons/react/24/outline'
 import React from 'react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { SIGN_UP_URL } from '../../constant/constant'
+import { LOGIN_URL } from '../../constant/constant'
 import { apiPost } from '../../services/services'
 // p pl pr pt pb >> m mr ml mt mb
 const Login = () => {
-    
+
   const {register, handleSubmit, formState: { errors } } = useForm()
   const [error, setError] = useState('')
   const emailReg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -15,7 +15,7 @@ const Login = () => {
 
     try {
       console.log(_body)
-      const { data } = await apiPost(SIGN_UP_URL, _body)
+      const { data } = await apiPost(LOGIN_URL, _body)
       console.log(data)
     } catch (err) {
       console.log(err.response.data)
@@ -26,16 +26,10 @@ const Login = () => {
   }
 
     const onSub = (data) => {
-      delete data.confirmPassword
+     
       console.log(data)
-      const obj = {
-        fullName: data.fullName,
-        email: data.email,
-        password: data.password
-      }
-      console.log(obj)
-
-      login(obj)
+    
+      login(data)
     }
     return (
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

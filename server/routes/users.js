@@ -70,7 +70,7 @@ router.post("/login", async(req, res) => {
         // create a token, the token get the user._id
         let token = genToken(user._id)
 
-        res.json({ token }); //res.json({ token }) equal to res.json({ token:token })
+        res.json({ token,role:user.role }); //res.json({ token }) equal to res.json({ token:token })
         // At the end we will need to send a token to the user
     } catch (err) {
         console.log(err);
